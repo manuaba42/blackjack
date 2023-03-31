@@ -41,12 +41,29 @@ def calculate_score(arr):
 condi = True
 trader = []
 player = []
-for i in range(0,2):
-    numPlayer = deal_card()
-    player.append(numPlayer)
+while condi == True:
+    if len(player) == 0:
+        for i in range(0,2):
+            numPlayer = deal_card()
+            player.append(numPlayer)
 
-scorePlayer = calculate_score(player)
-print(f"Your card: {player}, current score is: {scorePlayer}")
-trader.append(deal_card())
-print(f"Computer card is {trader}")
-# while condi == True:
+    scorePlayer = calculate_score(player)
+    if scorePlayer == 21:
+        print("You Won!")
+        condi = False
+    elif scorePlayer > 21:
+        condi = False
+    else:
+        print(f"Your card: {player}, current score is: {scorePlayer}")
+        if len(trader) == 0:
+            trader.append(deal_card())
+        print(f"Computer card is {trader}")
+
+        more = input("Type 'y' to get more card, 'n' to pass: ")
+        if more == 'n':
+            condi = False
+        else:
+            numPlayer = deal_card()
+            player.append(numPlayer)
+
+print(f"Your card: {player}, score is: {scorePlayer}")
