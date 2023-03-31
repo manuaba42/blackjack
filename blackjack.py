@@ -37,6 +37,13 @@ def calculate_score(arr):
 
     return sum(arr)
 
+def compare(com, player):
+    if com == player:
+        print("DRAW!!")
+    elif com > player:
+        print("You lose")
+    else:
+        print("You Win!!")
 
 condi = True
 trader = []
@@ -50,8 +57,13 @@ while condi == True:
     scorePlayer = calculate_score(player)
     if scorePlayer == 21:
         print("You Won!")
+        print(f"Your card: {player}, score is: {scorePlayer}")
+        exit()
         condi = False
     elif scorePlayer > 21:
+        print("You Lose!")
+        print(f"Your card: {player}, score is: {scorePlayer}")
+        exit()
         condi = False
     else:
         print(f"Your card: {player}, current score is: {scorePlayer}")
@@ -66,4 +78,15 @@ while condi == True:
             numPlayer = deal_card()
             player.append(numPlayer)
 
+con2 = True
+while con2 == True:
+    numCom = deal_card()
+    computerScore = sum(trader)
+    if computerScore + numCom > 21:
+        con2 = False
+    else:
+        trader.append(numCom)
+
+compare(computerScore, scorePlayer)
 print(f"Your card: {player}, score is: {scorePlayer}")
+print(f"Computer card: {trader}, score is: {computerScore}")
